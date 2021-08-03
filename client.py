@@ -8,6 +8,7 @@ DISCONNECT_MSG = "!!!DISCONNECT!!!"
 SERVER = "192.168.0.3"
 PLAYERCOUNT = "!!!COUNT!!!"
 ADDR = (SERVER, PORT)
+pygame.init()
 
 
 class Connect:
@@ -25,10 +26,19 @@ class Connect:
         self.s.send(message)
 
     def receive(self):
+        self.s.setblocking(False)
         while True:
-            player_move = self.s.recv(1024).decode('utf-8')
-            if player_move:
-                return player_move
+            try:
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        self.leave()
+                        sys.exit()
+                player_move = self.s.recv(1024).decode('utf-8')
+                if player_move:
+                    self.s.setblocking(True)
+                    return player_move
+            except BlockingIOError:
+                pass
 
     def playerCount(self):
         self.send(PLAYERCOUNT)
@@ -36,3 +46,5 @@ class Connect:
 
     def leave(self):
         self.send(DISCONNECT_MSG)
+
+
