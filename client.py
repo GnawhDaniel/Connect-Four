@@ -9,7 +9,6 @@ SERVER = "192.168.0.3"
 PLAYERCOUNT = "!!!COUNT!!!"
 ADDR = (SERVER, PORT)
 
-# Test
 
 class Connect:
     def __init__(self):
