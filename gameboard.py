@@ -19,7 +19,6 @@ class ConnectFour:
                 self.gameBoard = np.flip(self.gameBoard, axis=0)
                 return True
         else:
-            print('Game Board is full')
             self.gameBoard = np.flip(self.gameBoard, axis=0)
             return False
 
@@ -58,8 +57,10 @@ class ConnectFour:
             if helper(np.diag(np.fliplr(self.gameBoard), k=num)):
                 return True
 
+        if 0 not in self.gameBoard:
+            return "TIE"
+
         return False
 
     def resetBoard(self):
         self.gameBoard = np.zeros((6, 7), dtype=int)
-
