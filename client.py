@@ -5,8 +5,11 @@ import sys
 HEADER = 64
 PORT = 8080
 DISCONNECT_MSG = "!!!DISCONNECT!!!"
-SERVER = "192.168.0.3"
+SERVER = socket.gethostbyname(socket.gethostname())
+# SERVER = "192.168.0.3"
 PLAYERCOUNT = "!!!COUNT!!!"
+PLAYAGAIN = "!!!PLAYAGAIN!!!"
+
 ADDR = (SERVER, PORT)
 pygame.init()
 
@@ -25,7 +28,7 @@ class Connect:
         self.s.send(send_len)
         self.s.send(message)
 
-    def receive(self):
+    def receive(self, again=False):
         self.s.setblocking(False)
         while True:
             try:
@@ -33,12 +36,18 @@ class Connect:
                     if event.type == pygame.QUIT:
                         self.leave()
                         sys.exit()
-                player_move = self.s.recv(1024).decode('utf-8')
-                if player_move:
+
+                instruction = self.s.recv(1024).decode('utf-8')
+
+                if instruction:
                     self.s.setblocking(True)
-                    return player_move
+                    return instruction
+
             except BlockingIOError:
-                pass
+                if again:
+                    return ""
+                else:
+                    pass
 
     def playerCount(self):
         self.send(PLAYERCOUNT)
@@ -46,5 +55,3 @@ class Connect:
 
     def leave(self):
         self.send(DISCONNECT_MSG)
-
-
