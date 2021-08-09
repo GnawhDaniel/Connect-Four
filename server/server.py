@@ -36,6 +36,11 @@ class Server:
                 elif msg == PLAYERCOUNT:
                     conn.send(str(threading.activeCount() - 1).encode('utf-8'))
 
+                elif msg == PLAYAGAIN:
+                    for c in self.client_list:
+                        if c != conn:
+                            c.send(PLAYAGAIN.encode('utf-8'))
+
                 elif threading.activeCount() - 1 == 2:
                     for c in self.client_list:
                         if c != conn:
@@ -66,12 +71,17 @@ if __name__ == '__main__':
     PORT = 8080
     SERVER = socket.gethostbyname(socket.gethostname())
     ADDR = (SERVER, PORT)
+
     DISCONNECT_MSG = "!!!DISCONNECT!!!"
     PLAYERCOUNT = "!!!COUNT!!!"
+    PLAYAGAIN = "!!!PLAYAGAIN!!!"
+
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.bind(ADDR)
+
     try:
         serv = Server()
     except Exception:
-        print('Server is closing.')
+        s.close()
+
     s.close()
