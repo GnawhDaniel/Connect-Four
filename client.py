@@ -9,6 +9,7 @@ SERVER = socket.gethostbyname(socket.gethostname())
 # SERVER = "192.168.0.3"
 PLAYERCOUNT = "!!!COUNT!!!"
 PLAYAGAIN = "!!!PLAYAGAIN!!!"
+NOSPACE = "!!!NOSPACE!!!"
 
 ADDR = (SERVER, PORT)
 pygame.init()
@@ -17,8 +18,25 @@ pygame.init()
 class Connect:
     def __init__(self):
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.s.connect(ADDR)
+        self.connect()
         self.player_number = int(self.s.recv(1024).decode('UTF-8')[-1])
+
+    def connect(self):
+        self.s.setblocking(False)
+        while True:
+            try:
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        sys.exit()
+                print('test')
+                self.s.connect(ADDR)
+                self.s.setblocking(True)
+                print('true')
+                break
+            except BlockingIOError:
+                pass
+            except ConnectionRefusedError:
+                pass
 
     def send(self, msg):
         message = msg.encode('UTF-8')
