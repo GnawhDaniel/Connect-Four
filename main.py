@@ -4,6 +4,7 @@ from client import Connect
 from gameboard import ConnectFour
 import time
 
+
 pygame.init()
 pygame.font.init()
 
@@ -17,7 +18,7 @@ transparentScreen.set_alpha(225)
 transparentScreen.fill((200, 200, 200))
 
 highlightColor = pygame.Color(115, 115, 115, a=50)
-FONT = pygame.font.SysFont(None, 48)
+FONT = pygame.font.Font('assets/RockSalt-Regular.ttf', 23)
 
 blackCircle = pygame.image.load('assets/blackCircle.png').convert_alpha()
 blackCircle = pygame.transform.scale(blackCircle, (100, 100))
@@ -184,7 +185,7 @@ class Game:
             y += width
 
         playerNumBox = FONT.render(f"Player {self.player_number} (You)", True, (0, 0, 0))
-        screen.blit(playerNumBox, playerNumBox.get_rect(center=(screen.get_width()//2, 75)))
+        screen.blit(playerNumBox, playerNumBox.get_rect(center=(screen.get_width()//2, 65)))
 
         if self.playerCount != 2:
             waitingText1 = FONT.render("Waiting for new challenger . . .", True, (0, 0, 0))
@@ -259,7 +260,6 @@ class Game:
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    print('test')
                     self.client.leave()
                     sys.exit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
