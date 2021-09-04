@@ -4,7 +4,7 @@ Date: September 2021
 
 ---
 
-This was a program I worked on during summer break as an undergraduate student. The program has a multiplayer and singleplayer option. While working on the singleplayer portion of the program, it introduced me to the world of artificial intelligence with the implementation of the minimax algorithm (code for minimax not originally mine; more details below). It was also exciting to see the AI autonomously figure out different ways to beat its creator.
+This was a program I worked on during summer break as an undergraduate student. The program has a multiplayer and singleplayer option. While working on the singleplayer portion of the program, it introduced me to the world of artificial intelligence upon the discovery of the minimax algorithm. It was also exciting to see the AI autonomously figure out different ways to beat its creator.
 
 ***Additionally, the project allowed me develop my skills with Python's libraries such as PyGame, Numpy, and sockets.
 
