@@ -7,6 +7,8 @@ class ConnectFour:
 
     def place(self, col, playerNum) -> bool:
         """
+        Places an integer (representing the player) into the game board.
+
         :param col: column number
         :param playerNum: int (1 or 2)
         :return: boolean
@@ -14,25 +16,33 @@ class ConnectFour:
         col = int(col)
         self.gameBoard = np.flip(self.gameBoard, axis=0)
         for row in self.gameBoard:
-            if row[col-1] == 0:
-                row[col-1] = playerNum
+            if row[col - 1] == 0:
+                row[col - 1] = playerNum
                 self.gameBoard = np.flip(self.gameBoard, axis=0)
                 return True
         else:
             self.gameBoard = np.flip(self.gameBoard, axis=0)
             return False
 
-    def check(self, playerNum):
+    def check(self, player_num):
         """
-        :param playerNum: An integer - 1 or 2
+        Checks if playerNum has won the game.
+
+        :param player_num: An integer - 1 or 2
         :return: boolean
         """
-        assert playerNum in [1, 2], "playerNum is not an integer (1 or 2)"
+        assert player_num in [1, 2], "playerNum is not an integer (1 or 2)"
 
         def helper(r):
+            """
+            Checks if any player (1 or 2) has four in the given row.
+
+            :param r: 1 x n vector
+            :return: boolean
+            """
             count = 0
             for i in r:
-                if i == playerNum:
+                if i == player_num:
                     count += 1
                 else:
                     count = 0
@@ -62,5 +72,14 @@ class ConnectFour:
 
         return False
 
+    def playableCol(self):
+        """
+        :return: a list of empty, playable columns of the current game board.
+        """
+        gameBoardCopy = np.transpose(self.gameBoard.copy())
+        possibleMoves = [col for col, row in enumerate(gameBoardCopy) if 0 in row]
+        return possibleMoves
+
     def resetBoard(self):
+        """Resets self.gameboard into a matrix of zeros."""
         self.gameBoard = np.zeros((6, 7), dtype=int)
