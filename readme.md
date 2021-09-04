@@ -1,5 +1,5 @@
 # Connect Four (Work In Progress)
-Author: Daniel Hwang
+Author: Daniel Hwang  
 Date: September 2021
 
 ---
