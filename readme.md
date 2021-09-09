@@ -8,9 +8,9 @@ This was a program I worked on during summer break as an undergraduate student. 
 
 ***Additionally, the project allowed me develop my skills with Python's libraries such as PyGame, Numpy, and sockets.
 
-## Single Player
+## Single Player (Finished)
 The code for the minimax algorithm is not originally mine. While researching the minimax algorithm, I came across KeithGalli's python implementation for the minimax algorithm and used it as a reference for the singleplayer portion of my program.
 
 Original Code for MiniMax Algorithm: https://github.com/KeithGalli/Connect4-Python.git
 
-## Multiplayer
+## Multiplayer (WIP)
