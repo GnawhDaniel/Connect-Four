@@ -10,3 +10,8 @@ The code for the minimax algorithm is not originally mine. While researching the
 
 Original Code for MiniMax Algorithm: https://github.com/KeithGalli/Connect4-Python.git
 
+To run the program to play singleplayer:
+  1) Download the zip file.
+  2) Unzip the file into a folder.
+  3) Open the "main.py" file.
+
